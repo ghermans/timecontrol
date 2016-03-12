@@ -61,26 +61,7 @@
 
   </tbody>
   </table>
-<script>
-$(document).ready(function() {
-  $.fn.editable.defaults.mode = 'popup';
-  $('#status a').editable({
-    type: 'select',
-            title: 'Select status',
-            source: [
-                {value: 1, text: 'Approved'},
-                {value: 2, text: 'In progress '},
-                {value: 3, text: 'Rejected'}
-            ]
-  });
 
-  //ajax emulation
-  $.mockjax({
-      url: '/post',
-      responseTime: 200
-  });
-});
-    </script>
    </div>
    </div>
   </div>
@@ -102,7 +83,7 @@ $(document).ready(function() {
 <div class='block-content-outer'>
  <div class='block-content-inner'>
   <div class="container-fluid">
-  <table id="example4" class="table table-striped table-condensed">
+  <table id="otime_status" class="table table-striped table-condensed">
   <thead>
     <tr>
      <th class="col-md-3">Created</th>
@@ -114,18 +95,18 @@ $(document).ready(function() {
   </thead>
   <tbody>
   <tr>
-   <td><a href="#">30/11/2015 09:00 AM</a></td>
-   <td><a href="#">Registration</a></td>
-   <td><a href="#">Hermans Glenn</a></td>
-   <td><a href="#">10 min</a></td>
-   <td><span class="label label-warning">Open</span></td>
+   <td>30/11/2015 09:00 AM</td>
+   <td>Request</td>
+   <td>Hermans Glenn</td>
+   <td>10 min</td>
+   <td><a href="#" id="otime_status">Approved</a></td>
   </tr>
   <tr>
-   <td><a href="#">30/11/2015 09:00 AM</a></td>
-   <td><a href="#">Request</a></td>
-   <td><a href="#">Hermans Glenn</a></td>
-   <td><a href="#">10 min</a></td>
-   <td><span class="label label-success">Approved</span></td>
+   <td>30/11/2015 09:00 AM</td>
+   <td>Request</td>
+   <td>Hermans Glenn</td>
+   <td>10 min</td>
+   <td><a href="#" id="otime_status">Approved</a></td>
   </tr>
   </tbody>
   </table>
@@ -134,4 +115,34 @@ $(document).ready(function() {
   </div>
   </div>
  </div>
+
+ <script>
+$(document).ready(function() {
+  $.fn.editable.defaults.mode = 'inline';
+  $('#status a').editable({
+    type: 'select',
+            title: 'Select status',
+            source: [
+                {value: 1, text: 'Approved'},
+                {value: 2, text: 'In progress '},
+                {value: 3, text: 'Rejected'}
+            ]
+  });
+
+  $('#otime_status a').editable({
+    type: 'select',
+            title: 'Change status',
+            source: [
+                {value: 1, text: 'Approved'},
+                {value: 2, text: 'In progress '},
+                {value: 3, text: 'Rejected'}
+            ]
+  });
+  //ajax emulation
+  $.mockjax({
+      url: '/post',
+      responseTime: 200
+  });
+});
+    </script>
 @endsection

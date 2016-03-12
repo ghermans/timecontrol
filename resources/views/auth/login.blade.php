@@ -11,9 +11,10 @@
 
     <title>Time control - Sign in</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="{{ url('css/login.css') }}" rel="stylesheet">
-
+    
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -28,7 +29,7 @@
 <div class="login-form-container">
 
   <div class="panel panel-login">
-    <div class="panel-heading"><h3 class="panel-title"><strong>Sign In </strong></h3></div>
+    <div class="panel-heading text-center"><h3 class="panel-title"><strong><i class="fa fa-clock-o"></i>   Time Control </strong></h3></div>
     <form method="POST" action="/auth/login">
     <div class="panel-body">
     {!! csrf_field() !!}
