@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\User;
+
+use App\Departments;
 use App\Teams;
+use App\User;
+
+use App\Http\Controllers\Controller;
 
 class TeamsController extends Controller
 {
@@ -18,7 +22,7 @@ class TeamsController extends Controller
      */
     public function index()
     {
-        $teams = Teams::all();
+        $teams = Teams::orderBy('name', 'asc')->paginate(10);;
         return view('teams/list', ['teams' => $teams]);
     }
 
@@ -27,14 +31,14 @@ class TeamsController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        return view('teams/create', ['users' => $users]);
+        $data["departments"] = Departments::all();
+        $data["users"] = User::all();
+        return view('teams/create', $data);
     }
 
     /**
      * Store a newly created team in database.
      */
-
     public function store(Request $request)
     {
         $team = new Teams;
@@ -70,9 +74,14 @@ class TeamsController extends Controller
 
     /**
      * Remove the specified team from the database.
+     *
+     * @param integer, $id, The id off the team in the database.
      */
     public function destroy($id)
     {
-        //
+        Teams::destroy($id);
+        session()->flash('message', 'Team successfully deleted');
+
+        return redirect()->back();
     }
 }

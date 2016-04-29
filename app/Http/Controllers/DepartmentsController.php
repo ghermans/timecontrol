@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Departments;
-use App\Department_members;
+use App\DepartmentMembers;
 use Mail;
 use App\User;
+use App\Http\Controllers\Controller;
 
 class DepartmentsController extends Controller
 {
@@ -18,9 +19,15 @@ class DepartmentsController extends Controller
 
     public function index()
     {
-        $departments = Departments::orderBy('department_name', 'asc')->paginate(10);
+        $departments = Departments::orderBy('department_name', 'asc')->with('managers')->paginate(10);
         return view('departments/list', ['departments' => $departments]);
     }
+
+    public function relationtest()
+    {
+        $departments = DepartmentMembers::All();
+        return $departments;
+    }    
 
     public function create()
     {
@@ -31,10 +38,10 @@ class DepartmentsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Requests\DepartmentsValidator|Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\DepartmentsValidator $request)
     {
         $departments = new Departments;
         $departments->department_name = $request->get('department_name');
@@ -44,7 +51,7 @@ class DepartmentsController extends Controller
 
         $department_id = $departments->id;
 
-        $manager = new Department_members;
+        $manager = new DepartmentMembers;
         $manager->departmentid = $department_id;
         $manager->userid = $request->get('department_manager');
         $manager->save();
@@ -72,7 +79,7 @@ class DepartmentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('departments/edit');
     }
 
     /**

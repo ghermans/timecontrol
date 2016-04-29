@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<button class="btn btn-sm btn-danger">Remove department</button>
+<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete">Remove department</button>
 </div>
 </div>
 
@@ -63,7 +63,11 @@
  <tr>
    <td><input type="checkbox" name="department_id" value="{{ $department->id}}"></td>
    <td><a href="{{ url("staff/departments/edit")}}/{{$department->id}}">{{ $department->department_name}}</a></td>
-   <td>{{ $department->department_manager}}</td>
+
+     @foreach($department->managers as $manager)
+         <td>{{ $manager->fname}}</td>
+     @endforeach
+
    <td>{{ $department->created_at}}</td>
    <td>{{ $department->updated_at}}</td>
    <td></td>
@@ -80,6 +84,28 @@
 
 
 </div>
+</div>
+
+<!-- Modal -->
+<div id="delete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Waarschuwing!</h4>
+            </div>
+            <div class="modal-body">
+                <p>U staat op het punt om een department te verwijderen. Weet u zeker dat u verder wilt gaan?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger">Ja</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Nee</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 @endsection
